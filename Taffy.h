@@ -22,21 +22,28 @@ using namespace std;
 
 /* enum struct etc */
 
-enum TokenKind {
+enum TknKind {
     L소괄호 = '(', R소괄호 = ')', L중괄호 = '{', R중괄호 = '}', L대괄호 = '[', R대괄호 = ']',
     합 = '+', 차 = '-', 곱 = '*', 분 = '/', Mod = '%', Not = '!', Comma = ','
-    If, Elif, Else, Print, Input, Exit, Ident, IntNum, String, 
+    Func = 150, Var, If, Elif, Else, For, To, Step, While,
+	End, Break, Return, Option, Print, Println, Input, Toint, 
+	Exit, Equal, NotEq, Less, LessEq, Great, GreatEq, And, Or, 
+	End_KeyList,
+	Ident, IntNum, DblNum, String, Letter, Doll, Digit, 
+	Gvar, Lvar, Fcall, EofLine, Others 
+
+
 };
 
 struct Token {
-    TokenKind kind;
+    TknKind kind;
     string text;
     double dblVal;
     Token(){kind=Others; text=""; dblVal=0.0;}
-    Token(TokenKind k)      {kind=k; text=""; dblVal=0.0;}
-    Token(TokenKind k, double d) {kind=k; text=""; dblVal=d;}
-    Token(TokenKind k, const string& s) {kind=k; text=s; dblVal=0.0;}
-    Token(TokenKind k, const string& s, double d) {kind=k; text=s; dblVal=d;}
+    Token(TknKind k)      {kind=k; text=""; dblVal=0.0;}
+    Token(TknKind k, double d) {kind=k; text=""; dblVal=d;}
+    Token(TknKind k, const string& s) {kind=k; text=s; dblVal=0.0;}
+    Token(TknKind k, const string& s, double d) {kind=k; text=s; dblVal=d;}
 };
 
 enum SymKind {noId, varId, fncId, paraId};
@@ -58,16 +65,16 @@ struct SymTbl{
 };
 
 struct Codeset{
-    TokenKind kind;
+    TknKind kind;
     const char *text;
     double dblVal;
     int symNbr;
     int jumpAdress;
     Codeset(){clear();}
-    Codeset(TokenKind k) {clear();kind=k;}
-    Codeset(TokenKind k; double d) {clear();kind=k; dblVal=d;}
-    Codeset(TokenKind k; const char *s) {clear();kind=k; text=s;}
-    Codeset(TokenKind k, int sym, int jump) {
+    Codeset(TknKind k) {clear();kind=k;}
+    Codeset(TknKind k; double d) {clear();kind=k; dblVal=d;}
+    Codeset(TknKind k; const char *s) {clear();kind=k; text=s;}
+    Codeset(TknKind k, int sym, int jump) {
         clear(); kind=k; symNbr=sym; jumpAdress=jump;
     }
     void clear() {kind=Others; text=""; dblVal=0.0;jumpAdress=0; symNbr=-1;}
