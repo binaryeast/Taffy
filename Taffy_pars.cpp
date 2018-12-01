@@ -113,4 +113,4 @@ void convert_block_set()
 	backPatch(patch_line, get_linNo());
 }
 
-//p. 277부터
+//p. 277부터 dkdh
