@@ -113,6 +113,14 @@ void convert_block_set()
 	backPatch(patch_line, get_linNo());
 }
 
+void convert_block()
+{
+	TknKind k;
+	++blkNest;
+	while(k=token.kind, k!=Elif && k!=Else && k!=End && k!=EofProg)
+
+
+
 //p. 277บฮลอ dkd
 
 
