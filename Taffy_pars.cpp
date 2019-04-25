@@ -83,11 +83,11 @@ void convert()
 		setCode_End;
 		break;
 	case Break:
-		if (loopNest <= 0) err_exit("Àß¸øµÈ break¹® ÀÔ´Ï´Ù.");
+		if (loopNest <= 0) err_exit("ï¿½ß¸ï¿½ï¿½ï¿½ breakï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
 		setCode(token.kind); token = nextTkn(); convert_rest();
 		break;
 	case Return:
-		if (!fncDecl_F) err_exit("Àß¸øµÈ returnÀÔ´Ï´Ù.");
+		if (!fncDecl_F) err_exit("ï¿½ß¸ï¿½ï¿½ï¿½ returnï¿½Ô´Ï´ï¿½.");
 		setCode(token.kind); token = nextTkn(); convert_rest();
 		break;
 	case Exit:
@@ -97,7 +97,7 @@ void convert()
 		setCode(token.kind); token = nextTkn(); convert_rest();
 		break;
 	case End:
-		err_exit("Àß¸øµÈ endÀÔ´Ï´Ù.");
+		err_exit("ï¿½ß¸ï¿½ï¿½ï¿½ endï¿½Ô´Ï´ï¿½.");
 		break;
 	default: convert_rest(); break;
 	}
@@ -118,10 +118,38 @@ void convert_block()
 	TknKind k;
 	++blkNest;
 	while(k=token.kind, k!=Elif && k!=Else && k!=End && k!=EofProg)
+	{
+		convert();
+	}
+	--blkNest;
+}
 
+void convert_reset()
+{
+	int tblNbr;
 
-
-//p. 277ºÎÅÍ dkd
-
-
-//plz what the .vs!!!
+	for (;;) 
+	{
+		if (token.kind == EofLine) break;
+		switch (token.kind)
+		{
+			case If: case Elif: case Else: case For: case While: case Break:
+			case Func: case Return: case  Exit: case  Print: case Println:
+			case Option: case Var: case End:
+				err_exit("ìž˜ëª»ëœ ê¸°ìˆ ìž…ë‹ˆë‹¤: ", token.text);
+				break;
+			case Ident:
+				set_name():
+				if ((tblNbr=searchName(tmpTb.name, 'F')) != -1)
+				{
+					if (tmpTb.name == "main")err_exit("Mainí•¨ìˆ˜ëŠ” í˜¸ì¶œí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.")
+					setCode(Fcall, tblNbr); continue;
+				}
+				if ((tblNbr=searchName(tmpTb.name, 'V')) == -1)
+					
+		
+			default:
+				break;
+		}
+	}
+}

@@ -12,9 +12,9 @@ string dbl_to_s(double d)
 
 string err_msg(const string& a, const string& b)
 {
-	if (a == "") return b + " °¡ ÇÊ¿äÇÕ´Ï´Ù.";
-	if (b == "") return a + " °¡ ¹Ù¸£Áö ¾Ê½À´Ï´Ù.";
-	return b + " °¡ " + a + " ¾Õ¿¡ ÇÊ¿äÇÕ´Ï´Ù.";
+	if (a == "") return b + " ê°€ í•„ìš”í•©ë‹ˆë‹¤.";
+	if (b == "") return a + " ê°€ ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+	return b + " ê°€ " + a + " ì•ì— í•„ìš”í•©ë‹ˆë‹¤.";
 }
 
 void err_exit(Tobj a, Tobj b, Tobj c, Tobj d)
