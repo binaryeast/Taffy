@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define SHORT_SIZE sizeof(short int)
+#define SHORT_SIZ sizeof(short int)
 #define SHORT_P(p) (short int *)(p)
 #define UCHAR_P(p) (unsigned char *)(p)
 #define LIN_SIZ 255
@@ -23,16 +23,14 @@ using namespace std;
 /* enum struct etc */
 
 enum TknKind {
-    L소괄호 = '(', R소괄호 = ')', L중괄호 = '{', R중괄호 = '}', L대괄호 = '[', R대괄호 = ']',
-    합 = '+', 차 = '-', 곱 = '*', 분 = '/', Mod = '%', Not = '!', Comma = ','
+    Lparen = '(', Rparen = ')', Lbracket = '[', Rbracket = ']',
+    Plus = '+', Minus = '-', Multi = '*', Divi = '/', Mod = '%', Not = '!', Comma = ',', Assign = '=', Ifsub = '?', IntDivi = '\\', DblQ = '\"',
     Func = 150, Var, If, Elif, Else, For, To, Step, While,
 	End, Break, Return, Option, Print, Println, Input, Toint, 
 	Exit, Equal, NotEq, Less, LessEq, Great, GreatEq, And, Or, 
-	End_KeyList,
+	END_KeyList,
 	Ident, IntNum, DblNum, String, Letter, Doll, Digit, 
-	Gvar, Lvar, Fcall, EofLine, Others 
-
-
+	Gvar, Lvar, Fcall, EofProg, EofLine, Others 
 };
 
 struct Token {
@@ -47,34 +45,34 @@ struct Token {
 };
 
 enum SymKind {noId, varId, fncId, paraId};
-enum DataType {NON_T, DBL_T};
+enum DtType {NON_T, DBL_T};
 
 struct SymTbl{
     string name;
     SymKind nmKind;
-    char DataTyp;
+    char dtTyp;
     int aryLen;
     short args;
     int adrs;
     int frame;
     SymTbl() {clear();}
     void clear(){
-        name=""; nmKind=noId; DataTyp=NON_T;
+        name=""; nmKind=noId; dtTyp=NON_T;
         aryLen=0; args=0; adrs=0; frame=0;
     }
 };
 
-struct Codeset{
+struct CodeSet{
     TknKind kind;
     const char *text;
     double dblVal;
     int symNbr;
     int jumpAdress;
-    Codeset(){clear();}
-    Codeset(TknKind k) {clear();kind=k;}
-    Codeset(TknKind k; double d) {clear();kind=k; dblVal=d;}
-    Codeset(TknKind k; const char *s) {clear();kind=k; text=s;}
-    Codeset(TknKind k, int sym, int jump) {
+    CodeSet(){clear();}
+    CodeSet(TknKind k) {clear();kind=k;}
+    CodeSet(TknKind k, double d) {clear();kind=k; dblVal=d;}
+    CodeSet(TknKind k, const char *s) {clear();kind=k; text=s;}
+    CodeSet(TknKind k, int sym, int jump) {
         clear(); kind=k; symNbr=sym; jumpAdress=jump;
     }
     void clear() {kind=Others; text=""; dblVal=0.0;jumpAdress=0; symNbr=-1;}
@@ -103,9 +101,3 @@ class Mymemory {
     int size() {return (int)mem.size();}
     void resize(unsigned int n) {mem.resize(n);}
 };
-
-
-
-
-
-

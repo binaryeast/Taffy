@@ -1,5 +1,5 @@
-#include "Taffy.h"
-#include "Taffyprot.h"
+#include "taffy.h"
+#include "taffy_prot.h"
 
 int main(int argc, char *argv[])
 {

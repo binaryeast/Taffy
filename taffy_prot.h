@@ -38,7 +38,7 @@ void set_token_p(char *p);
 string DBG_kind_to_s(int kd);
 string kind_to_s(int kd);
 string kind_to_s(const CodeSet& cd);
-int get_linNo();
+int get_lineNo();
 
 // tbl.cpp symbol table handling
 
@@ -75,10 +75,10 @@ int get_topAdrs(const CodeSet& cd);
 int endline_of_If(int line);
 void chk_EofLine();
 TknKind lookCode(int line);
-CodeSet chk_nextCode(const CodeSet& cd, int kind2)
+CodeSet chk_nextCode(const CodeSet& cd, int kind2);
 CodeSet firstCode(int line);
-CodeSet nexCode();
-void chk_dtTyp(const Codeset& cd);
+CodeSet nextCode();
+void chk_dtTyp(const CodeSet& cd);
 void set_dtTyp(const CodeSet& cd, char typ);
 int set_LITERAL(double d);
 int set_LITERAL(const string& s);

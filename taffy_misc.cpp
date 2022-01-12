@@ -1,7 +1,7 @@
 
 
-#include "Taffy.h"
-#include "Taffy.h"
+#include "taffy.h"
+#include "taffy_prot.h"
 
 string dbl_to_s(double d)
 {
@@ -28,8 +28,6 @@ void err_exit(Tobj a, Tobj b, Tobj c, Tobj d)
 		if (ob[i].type == 'd') cout << ob[i].d;
 		if (ob[i].type == 's') cout << ob[i].s;
 	}
-
 	cout << endl;
 	exit(1);
-
 }
